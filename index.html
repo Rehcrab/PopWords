@@ -14,6 +14,9 @@
     font-size: 250px;
     color: black;
 }
+#errormessage {
+    font-size: 100px;
+}
     </style>
 </head>
 <body>
@@ -74,6 +77,7 @@
             <option value="list9"class="listitem">List 9</option>
         </select>
         <div id="word"></div>
+        <div id="errormessage"></div>
         <p id="wordOn">Current Word: </p>
         <button onclick="prevWord()">Previous Word</button>
         <button onclick="nextWord()">Next Word</button>
@@ -156,7 +160,7 @@ while (words.length<9){
     words.push([]);
 }
 while (listNames.length<9){
-    listNames.push("List "+listNames.length);
+    listNames.push("List "+(listNames.length+1));
 }
 var wordOrders=[];
 var a=[];
@@ -263,7 +267,11 @@ function updateStuff() {
     if (c>wordOrders[parseInt(listSelector2HTML.value.split("")[4])-1].length-1){
      c=0;
     }
+    if (typeof wordOrders[parseInt(listSelector2HTML.value.split("")[4])-1][c] == "undefined"){
+        document.getElementById("errormessage").innerText="No words in list."
+    } else{
     wordHTML.innerHTML=wordOrders[parseInt(listSelector2HTML.value.split("")[4])-1][c];
+    }
     document.getElementById("wordOn").innerHTML="Current Word: "+(c+1)+"/"+(wordOrders[parseInt(listSelector2HTML.value.split("")[4])-1].length);
 }
 function randomWord(){
@@ -278,4 +286,3 @@ setInterval(function(){
 },10);
     </script>
 </html>
-
