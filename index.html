@@ -124,6 +124,10 @@ if (getCookie("listnames") != ""){
   listNames=getCookie("listnames").split(";");
   hehe=getCookie("words").split(";");
   for (i=0;i<9;i++){
+    if (hehe[i]==""){
+       haha.push([]);
+       continue;
+    }
     haha.push(hehe[i].split(""));
   }
   for (i=0;i<9;i++){
