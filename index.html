@@ -89,6 +89,7 @@
         tabsHTML[i].style.display="none";
         }
         tabsHTML[tab].style.display="block";
+        c=0;
       }
       function setCookie(cname, cvalue, exdays) {
   const d = new Date();
@@ -252,7 +253,7 @@ function updateStuff() {
     for (i=0;i<listItemsHTML.length;i++){
         listItemsHTML[i].innerHTML=listNames[i%9];
     }
-    currListAdd=document.getElementById("listSelector1").value;
+    currListAdd=document.getElementById("listSelector").value;
     a=parseInt(currListAdd.split("")[4])-1;
     wordsInListHTML.innerHTML="";
     for (i=0;i<words[a].length;i++){
