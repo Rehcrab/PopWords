@@ -2,6 +2,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Playfair+Display">
     <title>Pop Words - ALL ARCHER</title>
     <style>
 .tab {
@@ -16,6 +17,14 @@
 }
 #errormessage {
     font-size: 100px;
+}
+* {
+    background-color: lightblue;
+    font-family: 'Playfair Display';
+    border-color: black;
+}
+button,input,select {
+    border-radius: 10px;
 }
     </style>
 </head>
@@ -272,7 +281,7 @@ function updateStuff() {
         document.getElementById("errormessage").innerText="No words in list."
     } else{
     wordHTML.innerHTML=wordOrders[parseInt(listSelector2HTML.value.split("")[4])-1][c];
-                document.getElementById("errormessage").innerText=""
+    document.getElementById("errormessage").innerText=""
     }
     document.getElementById("wordOn").innerHTML="Current Word: "+(c+1)+"/"+(wordOrders[parseInt(listSelector2HTML.value.split("")[4])-1].length);
 }
@@ -288,6 +297,3 @@ setInterval(function(){
 },10);
     </script>
 </html>
-
-
-
