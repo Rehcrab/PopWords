@@ -172,6 +172,10 @@ function save(){
  setCookie("listnames",g,1000);
  h=[];
  for (i=0;i<9;i++){
+    if (words[i]==[]){
+        h.push("");
+        continue;
+    }
     h.push(words[i].join(""));
  }
  p=h.join(";");
