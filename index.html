@@ -122,8 +122,8 @@ var listSelector1HTML=document.getElementById("listSelector1");
 var listSelector2HTML=document.getElementById("listSelector2");
 var wordHTML=document.getElementById("word");
 if (getCookie("listnames") != ""){
-  listNames=getCookie("listnames").split(";");
-  hehe=getCookie("words").split(";");
+  listNames=getCookie("listnames").split(":");
+  hehe=getCookie("words").split(":");
   for (i=0;i<9;i++){
     if (hehe[i]==""){
        haha.push([]);
@@ -179,7 +179,7 @@ function save(){
  g="";
  for (i=0;i<listNames.length;i++) {
     g+=listNames[i];
-    g+=";"
+    g+=":"
  }
  g.slice(0,-1);
  setCookie("listnames",g,1000);
@@ -191,7 +191,7 @@ function save(){
     }
     h.push(words[i].join(""));
  }
- p=h.join(";");
+ p=h.join(":");
  setCookie("words",p,1000);
 }
 function shuffle(array) {
@@ -278,3 +278,4 @@ setInterval(function(){
 },10);
     </script>
 </html>
+
