@@ -97,20 +97,6 @@ button,input,select {
     <script>
       var tabsHTML=document.getElementsByClassName("tab");
       var i=0;
-      function switchTab(tab) {
-        for (i=0;i<tabsHTML.length;i++) {
-        tabsHTML[i].style.display="none";
-        }
-        tabsHTML[tab].style.display="block";
-        c=0;
-      }
-      function setCookie(cname, cvalue, exdays) {
-  const d = new Date();
-  d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
-  let expires = "expires="+d.toUTCString();
-  document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
-}
-switchTab(0);
 function getCookie(cname) {
   let name = cname + "=";
   let ca = document.cookie.split(';');
@@ -171,7 +157,7 @@ while (words.length<9){
 while (listNames.length<9){
     listNames.push("List "+(listNames.length+1));
 }
-var wordOrders=[];
+//var wordOrders=[];
 var a=[];
 var b="";
 var c=0;
@@ -185,14 +171,10 @@ var currListAdd;
 var prevlistval=listSelectorHTML.value;
 var prevlist1val=listSelector1HTML.value;
 var prevlist2val=listSelector2HTML.value;
-for (i=0;i<9;i++){
-shuffle(words[i]);
-}
 for (i=0;i<words.length;i++){
-    wordOrders.push(words[i]);
+    //wordOrders.push(words[i]);
 }
-updateStuff();
-    save();
+
 function save(){
  g="";
  for (i=0;i<listNames.length;i++) {
@@ -213,73 +195,15 @@ function save(){
  setCookie("words",p,1000);
  
 }
-function shuffle(array) {
-  let currentIndex = array.length;
-  while (currentIndex != 0) {
-    let randomIndex = Math.floor(Math.random() * currentIndex);
-    currentIndex--;
-    [array[currentIndex], array[randomIndex]] = [
-      array[randomIndex], array[currentIndex]];
-  }
-  updateStuff();
-    save();
+
+      function setCookie(cname, cvalue, exdays) {
+  const d = new Date();
+  d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
+  let expires = "expires="+d.toUTCString();
+  document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
 }
-function addWord(){
-    d=document.getElementById("wordInput").value;
-    f=d.length;
-    for (i=0;i<f;i++){
-        words[parseInt(listSelectorHTML.value.split("")[4])-1].push(d[0]);
-        d=d.slice(1);
-    }
-    wordOrders=[];
-    for (i=0;i<words.length;i++){
-        shuffle(words[i]);
-    wordOrders.push(words[i]);
-}
-updateStuff();
-    save();
-}
-function removeWord() {
-    d=document.getElementById("wordInput").value;
-    f=d.length;
-    for (i=0;i<f;i++){
-        if (words[parseInt(listSelectorHTML.value.split("")[4])-1].indexOf(d[0]) > -1) { 
-  words[parseInt(listSelectorHTML.value.split("")[4])-1].splice(words[parseInt(listSelectorHTML.value.split("")[4])-1].indexOf(d[0]), 1);
-        d=d.slice(1);
-    }
-    wordOrders=[];
-}
-for (i=0;i<words.length;i++){
-        shuffle(words[i])
-    wordOrders.push(words[i]);
-}
-updateStuff();
-    save();
-}
-function prevWord(){
-    if (c==0){
-        c=wordOrders[parseInt(listSelector2HTML.value.split("")[4])-1].length-1;
-    } else {
-        c-=1;
-    }
-    updateStuff();
-    save();
-}
-function nextWord(){
-    if (c==(wordOrders[parseInt(listSelector2HTML.value.split("")[4])-1].length-1)){
-        c=0;
-    } else {
-        c+=1;
-    }
-    updateStuff();
-    save();
-}
-function rename() {
-    d=document.getElementById("listRename").value;
-    listNames[parseInt(listSelector1HTML.value.split("")[4])-1]=d;
-    updateStuff();
-    save();
-}
+
+
 function updateStuff() {
     for (i=0;i<listItemsHTML.length;i++){
         listItemsHTML[i].innerHTML=listNames[i%9];
@@ -291,22 +215,36 @@ function updateStuff() {
         b="<p class='auflaawfe'>Word "+(i+1)+": "+words[a][i]+"</p>";
         wordsInListHTML.innerHTML+=b;
     }
-    if (c>wordOrders[parseInt(listSelector2HTML.value.split("")[4])-1].length-1){
+    if (c>words[parseInt(listSelector2HTML.value.split("")[4])-1].length-1){
      c=0;
     }
-    if (typeof wordOrders[parseInt(listSelector2HTML.value.split("")[4])-1][c] == "undefined"){
+    if (typeof words[parseInt(listSelector2HTML.value.split("")[4])-1][c] == "undefined"){
         wordHTML.innerHTML="";
         document.getElementById("errormessage").innerText="No words in list."
     } else{
-    wordHTML.innerHTML=wordOrders[parseInt(listSelector2HTML.value.split("")[4])-1][c];
-    document.getElementById("errormessage").innerText=""
+    wordHTML.innerHTML=words[parseInt(listSelector2HTML.value.split("")[4])-1][c];
+    document.getElementById("errormessage").innerText="";
     }
-    document.getElementById("wordOn").innerHTML="Current Word: "+(c+1)+"/"+(wordOrders[parseInt(listSelector2HTML.value.split("")[4])-1].length);
+    document.getElementById("wordOn").innerHTML="Current Word: "+(c+1)+"/"+(words[parseInt(listSelector2HTML.value.split("")[4])-1].length);
+}
+updateStuff();
+    save();
+    function shuffle(array) {
+  let currentIndex = array.length;
+  while (currentIndex != 0) {
+    let randomIndex = Math.floor(Math.random() * currentIndex);
+    currentIndex--;
+    [array[currentIndex], array[randomIndex]] = [
+      array[randomIndex], array[currentIndex]];
+  }
+  updateStuff();
+    save();
 }
 function randomWord(){
+    //wordOrders=[];
     for (i=0;i<words.length;i++){
         shuffle(words[i])
-    wordOrders.push(words[i]);
+    //wordOrders.push(words[i]);
 }
 updateStuff();
     save();
@@ -328,5 +266,74 @@ setInterval(function(){
         prevlist2val=listSelector2HTML.value;
     } 
 },100);
+for (i=0;i<9;i++){
+shuffle(words[i]);
+}
+function addWord(){
+    d=document.getElementById("wordInput").value;
+    f=d.length;
+    for (i=0;i<f;i++){
+        words[parseInt(listSelectorHTML.value.split("")[4])-1].push(d[0]);
+        d=d.slice(1);
+    }
+    //wordOrders=[];
+    for (i=0;i<words.length;i++){
+        shuffle(words[i]);
+    //wordOrders.push(words[i]);
+}
+    updateStuff();
+    save();
+}
+function removeWord() {
+    d=document.getElementById("wordInput").value;
+    f=d.length;
+    for (i=0;i<f;i++){
+        if (words[parseInt(listSelectorHTML.value.split("")[4])-1].indexOf(d[0]) > -1) { 
+  words[parseInt(listSelectorHTML.value.split("")[4])-1].splice(words[parseInt(listSelectorHTML.value.split("")[4])-1].indexOf(d[0]), 1);
+        d=d.slice(1);
+    }
+    //wordOrders=[];
+}
+for (i=0;i<words.length;i++){
+        shuffle(words[i])
+    //wordOrders.push(words[i]);
+}
+updateStuff();
+    save();
+}
+function prevWord(){
+    if (c==0){
+        c=words[parseInt(listSelector2HTML.value.split("")[4])-1].length-1;
+    } else {
+        c-=1;
+    }
+    updateStuff();
+    save();
+}
+function nextWord(){
+    if (c==(words[parseInt(listSelector2HTML.value.split("")[4])-1].length-1)){
+        c=0;
+    } else {
+        c+=1;
+    }
+    updateStuff();
+    save();
+}
+function rename() {
+    d=document.getElementById("listRename").value;
+    listNames[parseInt(listSelector1HTML.value.split("")[4])-1]=d;
+    updateStuff();
+    save();
+}
+function switchTab(tab) {
+        for (i=0;i<tabsHTML.length;i++) {
+        tabsHTML[i].style.display="none";
+        }
+        tabsHTML[tab].style.display="block";
+        c=0;
+        updateStuff()
+        save()
+      }
+      switchTab(0)
     </script>
 </html>
