@@ -151,6 +151,12 @@ if (getCookie("listnames") != ""){
     ];
     words=[[],[],[],[],[],[],[],[],[]];
 }
+while (words.length<9){
+    words.push([]);
+}
+while (listNames.length<9){
+    listNames.push("List "+listNames.length);
+}
 var wordOrders=[];
 var a=[];
 var b="";
