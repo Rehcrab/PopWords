@@ -272,6 +272,7 @@ function updateStuff() {
         document.getElementById("errormessage").innerText="No words in list."
     } else{
     wordHTML.innerHTML=wordOrders[parseInt(listSelector2HTML.value.split("")[4])-1][c];
+                document.getElementById("errormessage").innerText=""
     }
     document.getElementById("wordOn").innerHTML="Current Word: "+(c+1)+"/"+(wordOrders[parseInt(listSelector2HTML.value.split("")[4])-1].length);
 }
@@ -287,3 +288,4 @@ setInterval(function(){
 },10);
     </script>
 </html>
+
