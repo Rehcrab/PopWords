@@ -1,0 +1,256 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pop Words - ALL ARCHER</title>
+    <style>
+.tab {
+    display: none;
+}
+.auflaawfe {
+    font-size: 30px;
+}
+#word {
+    font-size: 250px;
+    color: black;
+}
+    </style>
+</head>
+<body>
+    <h1>Chinese Pop Words - ALL MADE BY ARCHER</h1>
+    <div id="header"><button onclick="switchTab(0)">ADD/REMOVE WORDS</button><button onclick="switchTab(1)">Rename a List</button><button onclick="switchTab(2)">PRACTICE</button></div>
+    <div class="tab">
+        <h2>Add/Remove Words to List</h2>
+        <label for="listSelector">Choose a List:</label>
+        <select id="listSelector">
+            <option value="list1"class="listitem">List 1</option>
+            <option value="list2"class="listitem">List 2</option>
+            <option value="list3"class="listitem">List 3</option>
+            <option value="list4"class="listitem">List 4</option>
+            <option value="list5"class="listitem">List 5</option>
+            <option value="list6"class="listitem">List 6</option>
+            <option value="list7"class="listitem">List 7</option>
+            <option value="list8"class="listitem">List 8</option>
+            <option value="list9"class="listitem">List 9</option>
+        </select>
+        <br>
+        <input type="text" id="wordInput" placeholder="Enter word(s) to add/remove">
+        <br>
+        <button id="addWordButton" onclick="addWord()">Add</button>
+        <button id="removeWordButton" onclick="removeWord()">Remove</button>
+        <h2>Words in Selected List</h2>
+        <div id="wordsInList"></div>
+    </div>
+    <div class="tab">
+        <h2>Rename List</h2>
+        <label for="listSelector1">Choose a List:</label>
+        <select id="listSelector1">
+            <option value="list1"class="listitem">List 1</option>
+            <option value="list2"class="listitem">List 2</option>
+            <option value="list3"class="listitem">List 3</option>
+            <option value="list4"class="listitem">List 4</option>
+            <option value="list5"class="listitem">List 5</option>
+            <option value="list6"class="listitem">List 6</option>
+            <option value="list7"class="listitem">List 7</option>
+            <option value="list8"class="listitem">List 8</option>
+            <option value="list9"class="listitem">List 9</option>
+        </select>
+        <input type="text" id="listRename" placeholder="What should the list be renamed to?">
+        <br>
+        <button id="renameButton" onclick="rename()">Rename</button>
+    </div>
+    <div class="tab">
+        <h2>Practice Words</h2>
+        <label for="listSelector2">Pick a List:</label>
+        <select id="listSelector2">
+            <option value="list1"class="listitem">List 1</option>
+            <option value="list2"class="listitem">List 2</option>
+            <option value="list3"class="listitem">List 3</option>
+            <option value="list4"class="listitem">List 4</option>
+            <option value="list5"class="listitem">List 5</option>
+            <option value="list6"class="listitem">List 6</option>
+            <option value="list7"class="listitem">List 7</option>
+            <option value="list8"class="listitem">List 8</option>
+            <option value="list9"class="listitem">List 9</option>
+        </select>
+        <div id="word"></div>
+        <p id="wordOn">Current Word: </p>
+        <button onclick="prevWord()">Previous Word</button>
+        <button onclick="nextWord()">Next Word</button>
+        <br>
+        <br>
+        <button onclick="randomWord()" id="randomWords">Randomize Words</button>
+    </div>
+    <script>
+      var tabsHTML=document.getElementsByClassName("tab");
+      var i=0;
+      function switchTab(tab) {
+        for (i=0;i<tabsHTML.length;i++) {
+        tabsHTML[i].style.display="none";
+        }
+        tabsHTML[tab].style.display="block";
+      }
+      function setCookie(cname, cvalue, exdays) {
+  const d = new Date();
+  d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
+  let expires = "expires="+d.toUTCString();
+  document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+}
+switchTab(0);
+function getCookie(cname) {
+  let name = cname + "=";
+  let ca = document.cookie.split(';');
+  for(i=0; i < ca.length; i++) {
+    let c = ca[i];
+    while (c.charAt(0) == ' ') {
+      c = c.substring(1);
+    }
+    if (c.indexOf(name) == 0) {
+      return c.substring(name.length, c.length);
+    }
+  }
+  return "";
+}
+var listNames,hehe;
+var haha=[];
+var words=[];
+var listItemsHTML=document.getElementsByClassName("listitem");
+var wordsInListHTML=document.getElementById("wordsInList");
+var listSelectorHTML=document.getElementById("listSelector");
+var listSelector1HTML=document.getElementById("listSelector1");
+var listSelector2HTML=document.getElementById("listSelector2");
+var wordHTML=document.getElementById("word");
+if (getCookie("listnames") != ""){
+  listNames=getCookie("listnames").split(";");
+  hehe=getCookie("words").split(";");
+  for (i=0;i<9;i++){
+    haha.push(hehe[i].split(""));
+  }
+  for (i=0;i<9;i++){
+    words.push(haha[i])
+  }
+} else {
+    listNames=[
+        ["List 1"],
+        ["List 2"],
+        ["List 3"],
+        ["List 4"],
+        ["List 5"],
+        ["List 6"],
+        ["List 7"],
+        ["List 8"],
+        ["List 9"],
+    ];
+    words=[[],[],[],[],[],[],[],[],[]];
+}
+var wordOrders=[];
+var a=[];
+var b="";
+var c=0;
+var d;
+var e;
+var f;
+var g;
+var h;
+var p;
+var currListAdd;
+shuffle(words[i]);
+for (i=0;i<words.length;i++){
+    wordOrders.push(words[i]);
+}
+function save(){
+ g="";
+ for (i=0;i<listNames.length;i++) {
+    g+=listNames[i];
+    g+=";"
+ }
+ g.slice(0,-1);
+ setCookie("listnames",g,1000);
+ h=[];
+ for (i=0;i<9;i++){
+    h.push(words[i].join(""));
+ }
+ p=h.join(";");
+ setCookie("words",p,1000);
+}
+function shuffle(array) {
+  let currentIndex = array.length;
+  while (currentIndex != 0) {
+    let randomIndex = Math.floor(Math.random() * currentIndex);
+    currentIndex--;
+    [array[currentIndex], array[randomIndex]] = [
+      array[randomIndex], array[currentIndex]];
+  }
+}
+function addWord(){
+    d=document.getElementById("wordInput").value;
+    f=d.length;
+    for (i=0;i<f;i++){
+        words[parseInt(listSelectorHTML.value.split("")[4])-1].push(d[0]);
+        d=d.slice(1);
+    }
+    wordOrders=[];
+    for (i=0;i<words.length;i++){
+        shuffle(words[i]);
+    wordOrders.push(words[i]);
+}
+}
+function removeWord() {
+    d=document.getElementById("wordInput").value;
+    f=d.length;
+    for (i=0;i<f;i++){
+        if (words[parseInt(listSelectorHTML.value.split("")[4])-1].indexOf(d[0]) > -1) { 
+  words[parseInt(listSelectorHTML.value.split("")[4])-1].splice(words[parseInt(listSelectorHTML.value.split("")[4])-1].indexOf(d[0]), 1);
+        d=d.slice(1);
+    }
+    wordOrders=[];
+}
+for (i=0;i<words.length;i++){
+        shuffle(words[i])
+    wordOrders.push(words[i]);
+}
+}
+function prevWord(){
+    if (c==0){
+        c=wordOrders[parseInt(listSelector2HTML.value.split("")[4])-1].length-1;
+    } else {
+        c-=1;
+    }
+}
+function nextWord(){
+    if (c==(wordOrders[parseInt(listSelector2HTML.value.split("")[4])-1].length-1)){
+        c=0;
+    } else {
+        c+=1;
+    }
+}
+function rename() {
+    d=document.getElementById("listRename").value;
+    listNames[parseInt(listSelector1HTML.value.split("")[4])-1]=d;
+}
+function updateStuff() {
+    for (i=0;i<listItemsHTML.length;i++){
+        listItemsHTML[i].innerHTML=listNames[i%9];
+    }
+    currListAdd=document.getElementById("listSelector1").value;
+    a=parseInt(currListAdd.split("")[4])-1;
+    wordsInListHTML.innerHTML="";
+    for (i=0;i<words[a].length;i++){
+        b="<p class='auflaawfe'>Word "+(i+1)+": "+words[a][i]+"</p>";
+        wordsInListHTML.innerHTML+=b;
+    }
+    wordHTML.innerHTML=wordOrders[parseInt(listSelector2HTML.value.split("")[4])-1][c];
+    document.getElementById("wordOn").innerHTML="Current Word: "+(c+1)+"/"+(wordOrders[parseInt(listSelector2HTML.value.split("")[4])-1].length);
+}
+function randomWord(){
+    for (i=0;i<words.length;i++){
+        shuffle(words[i])
+    wordOrders.push(words[i]);
+}
+}
+setInterval(function(){
+    updateStuff();
+    save();
+},10);
+    </script>
+</html>
