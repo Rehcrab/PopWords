@@ -124,7 +124,11 @@ if (getCookie("listnames") != ""){
   listNames=getCookie("listnames").split(";");
   hehe=getCookie("words").split(";");
   for (i=0;i<9;i++){
-    if (hehe[i]==[]){
+    if (hehe[i]==""){
+       haha.push([]);
+       continue;
+    }
+    if (typeof hehe[i]=='undefined'){
        haha.push([]);
        continue;
     }
