@@ -268,6 +268,7 @@ function updateStuff() {
      c=0;
     }
     if (typeof wordOrders[parseInt(listSelector2HTML.value.split("")[4])-1][c] == "undefined"){
+        wordHTML.innerHTML="";
         document.getElementById("errormessage").innerText="No words in list."
     } else{
     wordHTML.innerHTML=wordOrders[parseInt(listSelector2HTML.value.split("")[4])-1][c];
