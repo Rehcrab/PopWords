@@ -260,6 +260,9 @@ function updateStuff() {
         b="<p class='auflaawfe'>Word "+(i+1)+": "+words[a][i]+"</p>";
         wordsInListHTML.innerHTML+=b;
     }
+    if (c>wordOrders[parseInt(listSelector2HTML.value.split("")[4])-1].length-1){
+     c=0;
+    }
     wordHTML.innerHTML=wordOrders[parseInt(listSelector2HTML.value.split("")[4])-1][c];
     document.getElementById("wordOn").innerHTML="Current Word: "+(c+1)+"/"+(wordOrders[parseInt(listSelector2HTML.value.split("")[4])-1].length);
 }
