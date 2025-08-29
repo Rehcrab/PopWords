@@ -182,12 +182,17 @@ var g;
 var h;
 var p;
 var currListAdd;
+var prevlistval=listSelectorHTML.value;
+var prevlist1val=listSelector1HTML.value;
+var prevlist2val=listSelector2HTML.value;
 for (i=0;i<9;i++){
 shuffle(words[i]);
 }
 for (i=0;i<words.length;i++){
     wordOrders.push(words[i]);
 }
+updateStuff();
+    save();
 function save(){
  g="";
  for (i=0;i<listNames.length;i++) {
@@ -206,6 +211,7 @@ function save(){
  }
  p=h.join(":");
  setCookie("words",p,1000);
+ 
 }
 function shuffle(array) {
   let currentIndex = array.length;
@@ -215,6 +221,8 @@ function shuffle(array) {
     [array[currentIndex], array[randomIndex]] = [
       array[randomIndex], array[currentIndex]];
   }
+  updateStuff();
+    save();
 }
 function addWord(){
     d=document.getElementById("wordInput").value;
@@ -228,6 +236,8 @@ function addWord(){
         shuffle(words[i]);
     wordOrders.push(words[i]);
 }
+updateStuff();
+    save();
 }
 function removeWord() {
     d=document.getElementById("wordInput").value;
@@ -243,6 +253,8 @@ for (i=0;i<words.length;i++){
         shuffle(words[i])
     wordOrders.push(words[i]);
 }
+updateStuff();
+    save();
 }
 function prevWord(){
     if (c==0){
@@ -250,6 +262,8 @@ function prevWord(){
     } else {
         c-=1;
     }
+    updateStuff();
+    save();
 }
 function nextWord(){
     if (c==(wordOrders[parseInt(listSelector2HTML.value.split("")[4])-1].length-1)){
@@ -257,10 +271,14 @@ function nextWord(){
     } else {
         c+=1;
     }
+    updateStuff();
+    save();
 }
 function rename() {
     d=document.getElementById("listRename").value;
     listNames[parseInt(listSelector1HTML.value.split("")[4])-1]=d;
+    updateStuff();
+    save();
 }
 function updateStuff() {
     for (i=0;i<listItemsHTML.length;i++){
@@ -290,11 +308,25 @@ function randomWord(){
         shuffle(words[i])
     wordOrders.push(words[i]);
 }
+updateStuff();
+    save();
 }
 setInterval(function(){
-    updateStuff();
-    save();
+    if (listSelectorHTML.value!=prevlistval){
+        updateStuff();
+        save();
+        prevlistval=listSelectorHTML.value;
+    }
+    if (listSelector1HTML.value!=prevlist1val){
+        updateStuff();
+        save();
+        prevlist1val=listSelector1HTML.value;
+    }
+    if (listSelector2HTML.value!=prevlist2val){
+        updateStuff();
+        save();
+        prevlist2val=listSelector2HTML.value;
+    } 
 },100);
     </script>
 </html>
-
