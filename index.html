@@ -50,6 +50,7 @@ button,input,select {
         <br>
         <button id="addWordButton" onclick="addWord()">Add</button>
         <button id="removeWordButton" onclick="removeWord()">Remove</button>
+        <p id="showaddrem"></p>
         <h2>Words in Selected List</h2>
         <div id="wordsInList"></div>
     </div>
@@ -167,6 +168,9 @@ var f;
 var g;
 var h;
 var p;
+var q;
+var r;
+var s;
 var currListAdd;
 var prevlistval=listSelectorHTML.value;
 var prevlist1val=listSelector1HTML.value;
@@ -270,9 +274,11 @@ shuffle(words[i]);
 function addWord(){
     d=document.getElementById("wordInput").value;
     f=d.length;
+    r="";
     for (i=0;i<f;i++){
-        if (!words[parseInt(listSelectorHTML.value.split("")[4])-1].includes(d[0])){
+        if (!words[parseInt(listSelectorHTML.value.split("")[4])-1].includes(d[0])&&!"QWERTYUIOPASDFGHJKLZXCVBNMzxcvbnmasdfgjklqwertyuiop`1234567890-=[];',./<>?:\"\\{}|_+~!@#$%^&*()~！@#￥%……&*（）——+{}}|：“《》？·-=【】、；‘，。/".includes(d[0])) {
         words[parseInt(listSelectorHTML.value.split("")[4])-1].push(d[0]);
+        r+=d[0];
         }
         d=d.slice(1);
     }
@@ -280,6 +286,11 @@ function addWord(){
     for (i=0;i<words.length;i++){
         shuffle(words[i]);
     //wordOrders.push(words[i]);
+    document.getElementById("showaddrem").innerText="Successfully added "+r.length+" words: "+r;
+    setTimeout(function(){
+        document.getElementById("showaddrem").innerText="";
+    },5000)
+
 }
     updateStuff();
     save();
@@ -287,10 +298,11 @@ function addWord(){
 function removeWord() {
     d=document.getElementById("wordInput").value;
     f=d.length;
+    q="";
     for (i=0;i<f;i++){
         if (words[parseInt(listSelectorHTML.value.split("")[4])-1].indexOf(d[0]) > -1) { 
   words[parseInt(listSelectorHTML.value.split("")[4])-1].splice(words[parseInt(listSelectorHTML.value.split("")[4])-1].indexOf(d[0]), 1);
-        
+        q+=d[0];
     }
     d=d.slice(1);
     //wordOrders=[];
@@ -299,6 +311,10 @@ for (i=0;i<words.length;i++){
         shuffle(words[i])
     //wordOrders.push(words[i]);
 }
+document.getElementById("showaddrem").innerText="Successfully removed "+q.length+" words: "+q;
+    setTimeout(function(){
+        document.getElementById("showaddrem").innerText="";
+    },5000)
 updateStuff();
     save();
 }
