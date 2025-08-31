@@ -171,9 +171,7 @@ var currListAdd;
 var prevlistval=listSelectorHTML.value;
 var prevlist1val=listSelector1HTML.value;
 var prevlist2val=listSelector2HTML.value;
-for (i=0;i<words.length;i++){
-    //wordOrders.push(words[i]);
-}
+
 
 function save(){
  g="";
@@ -273,7 +271,9 @@ function addWord(){
     d=document.getElementById("wordInput").value;
     f=d.length;
     for (i=0;i<f;i++){
+        if (!words[parseInt(listSelectorHTML.value.split("")[4])-1].includes(d[0])){
         words[parseInt(listSelectorHTML.value.split("")[4])-1].push(d[0]);
+        }
         d=d.slice(1);
     }
     //wordOrders=[];
@@ -290,8 +290,9 @@ function removeWord() {
     for (i=0;i<f;i++){
         if (words[parseInt(listSelectorHTML.value.split("")[4])-1].indexOf(d[0]) > -1) { 
   words[parseInt(listSelectorHTML.value.split("")[4])-1].splice(words[parseInt(listSelectorHTML.value.split("")[4])-1].indexOf(d[0]), 1);
-        d=d.slice(1);
+        
     }
+    d=d.slice(1);
     //wordOrders=[];
 }
 for (i=0;i<words.length;i++){
