@@ -248,8 +248,6 @@ function randomWord(){
         shuffle(words[ti])
     //wordOrders.push(words[i]);
 }
-updateStuff();
-    save();
 }
 setInterval(function(){
     if (listSelectorHTML.value!=prevlistval){
@@ -276,7 +274,7 @@ function addWord(){
     f=d.length;
     r="";
     for (i=0;i<f;i++){
-        if (!words[parseInt(listSelectorHTML.value.split("")[4])-1].includes(d[0])&&!"QWERTYUIOPASDFGHJKLZXCVBNMzxcvbnmasdfgjklqwertyuiop`1234567890-=[];',./<>?:\"\\{}|_+~!@#$%^&*()~！@#￥%……&*（）——+{}}|：“《》？·-=【】、；‘，。/".includes(d[0])) {
+        if (!words[parseInt(listSelectorHTML.value.split("")[4])-1].includes(d[0])&&!"QWERTYUIOPASDFGHJKLZXCVBNMzxcvbnmasdfgjklqwertyuiop`1234567890-=[];',./<>?:\"\\{}|_+~!@#$%^&*()~！@#￥%……&*（）——+{}}|：“”《》？·-=【】、；‘’，。/ ".includes(d[0])) {
         words[parseInt(listSelectorHTML.value.split("")[4])-1].push(d[0]);
         r+=d[0];
         }
