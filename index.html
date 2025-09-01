@@ -1,3 +1,4 @@
+
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -283,13 +284,13 @@ function addWord(){
     //wordOrders=[];
     for (i=0;i<words.length;i++){
         shuffle(words[i]);
+    }
     //wordOrders.push(words[i]);
     if (r.length!=0){
     document.getElementById("showaddrem").innerText="Successfully added "+r.length+" words: "+r;
     setTimeout(function(){
         document.getElementById("showaddrem").innerText="";
     },5000)
-    }
 }
     updateStuff();
     save();
